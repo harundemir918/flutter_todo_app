@@ -2,9 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 import 'category_card.dart';
-import '../../../models/category.dart';
 import '../../../providers/category_provider.dart';
-import '../../../services/repository.dart';
 
 class CategoryList extends StatefulWidget {
   @override
@@ -12,22 +10,12 @@ class CategoryList extends StatefulWidget {
 }
 
 class _CategoryListState extends State<CategoryList> {
-  Repository repository = Repository();
-
-  @override
-  void initState() {
-    WidgetsBinding.instance.addPostFrameCallback(_callApi);
-    super.initState();
-  }
-
-  _callApi(_) {
-    repository.fetchCategories(context);
-  }
-
   @override
   Widget build(BuildContext context) {
     double screenWidth = MediaQuery.of(context).size.width;
     double screenHeight = MediaQuery.of(context).size.height;
+    final categoryData = Provider.of<CategoryProvider>(context);
+    final categoryList = categoryData.categories;
 
     return Container(
       height: screenHeight * 0.5,
@@ -39,13 +27,12 @@ class _CategoryListState extends State<CategoryList> {
         builder: (_, CategoryProvider categoryProvider, __) {
           return ListView.builder(
             scrollDirection: Axis.horizontal,
-            itemCount: categoryProvider.categoryCount,
+            itemCount: categoryList.length,
             itemBuilder: (context, index) {
-              OneCategory category = categoryProvider.category.categories[index];
               return CategoryCard(
-                id: int.parse(category.id),
-                title: category.title,
-                color: category.color,
+                id: categoryList[index].id,
+                title: categoryList[index].title,
+                color: categoryList[index].color,
               );
             },
           );

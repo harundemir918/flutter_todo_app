@@ -6,7 +6,6 @@ import 'ui/screens/main_screen.dart';
 import 'ui/screens/tasks_screen.dart';
 import 'providers/category_provider.dart';
 import 'providers/task_provider.dart';
-import 'services/repository.dart';
 
 void main() {
   runApp(MyApp());

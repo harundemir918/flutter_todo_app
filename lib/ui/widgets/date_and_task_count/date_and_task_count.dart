@@ -3,13 +3,8 @@ import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
 
 import '../../../providers/task_provider.dart';
-import '../../../models/task.dart';
 
 class DateAndTaskCount extends StatefulWidget {
-  final int taskCount;
-
-  DateAndTaskCount(this.taskCount);
-
   @override
   _DateAndTaskCountState createState() => _DateAndTaskCountState();
 }
@@ -39,7 +34,7 @@ class _DateAndTaskCountState extends State<DateAndTaskCount> {
           SizedBox(height: screenHeight * 0.01,),
           Consumer<TaskProvider>(
             builder: (context, task, _) => Text(
-              "You have ${task.categoryTaskCount} new tasks.",
+              "You have ${task.tasks.length} new tasks.",
               style: TextStyle(
                 color: Colors.white,
                 fontSize: 18,

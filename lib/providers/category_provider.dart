@@ -1,22 +1,24 @@
 import 'package:flutter/material.dart';
 
-import '../services/database.dart';
 import '../models/category.dart';
 
 class CategoryProvider with ChangeNotifier {
-  Category _category = Category();
-  Database _database = Database();
+  List<Category> _categories = [
+    Category(
+      id: 1,
+      title: "Proje",
+      color: "FF0000",
+      createDate: "2020-10-30 00:00:00",
+    ),
+    Category(
+      id: 2,
+      title: "Alışveriş",
+      color: "00FF00",
+      createDate: "2020-10-30 00:00:00",
+    ),
+  ];
 
-  Category get category => _category;
-
-  int get categoryCount => _category.count;
-
-  set category(Category category) {
-    _category = category;
-    notifyListeners();
-  }
-
-  Future<void> fetchCategories() async {
-    category = await _database.getCategories();
+  List<Category> get categories {
+    return [..._categories];
   }
 }

@@ -68,7 +68,7 @@ class CategoryCard extends StatelessWidget {
                       children: [
                         Consumer<TaskProvider>(
                           builder: (context, task, _) => Text(
-                            "Total: ${task.categoryTaskCount} Task",
+                            "Total: ${task.getTaskById(id).length} Task",
                             style: TextStyle(
                               fontSize: 17,
                             ),
